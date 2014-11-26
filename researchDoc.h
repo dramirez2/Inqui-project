@@ -10,4 +10,6 @@
 
 @interface researchDoc : UIViewController
 
+@property (nonatomic,strong) NSString *cellTitle;
+
 @end

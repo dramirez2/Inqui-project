@@ -9,16 +9,23 @@
 //self es ResearchVIewController
 #import "ResearchViewViewController.h"
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
 @interface ResearchViewViewController ()
 
 @end
 
 @implementation ResearchViewViewController
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"I was clicked at %@", indexPath);
-//    UIViewController *researchDoc = [[UIViewController alloc] init];
-//    UIApplication *delegateAssist = [[UIApplication sharedApplication] delegate];
+
+    UIViewController *researchDoc = [[UIViewController alloc] init];
+    
+    
+    //Sends the view to the researchDoc
+    [self.navigationController pushViewController:researchDoc animated:YES];
+    
     
 }
 
@@ -28,18 +35,37 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
-//    int n = indexPath.row;
 //    indexPath.length;
     //Me quede tratando de unir un int al string
-//    NSString ab = @"Research %d", 1;
-//    cell.detailTextLabel.text = ab;
+    
+    cell.detailTextLabel.text = @"Research title";
     
     return cell;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    
+//    //Data test
+//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
+//    testObject[@"foo"] = @"bar";
+//    [testObject saveInBackground];
+    
+
+    NSDictionary *dimensions = @{
+                                 // What type of news is this?
+                                 @"category": @"politics",
+                                 // Is it a weekday or the weekend?
+                                 @"dayType": @"weekday",
+                                 };
+    // Send the dimensions to Parse along with the 'read' event
+    
+    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
     // Do any additional setup after loading the view.
     self.title = @"Researches";
+    
     //En los ultimos dos son width y height, primeros x, y
     UITableView *tbresearches = [[UITableView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width , self.view.bounds.size.height)];
     tbresearches.delegate = self;
