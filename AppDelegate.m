@@ -30,56 +30,26 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
-    //Test user sign in
-    PFUser *user = [PFUser user];
-    user.username = @"RandomUser";
-    user.password = @"blah";
-    user.email = @"example@gmail.com";
-    
-    // other fields can be set if you want to save more information
-    //    user[@"phone"] = @"650-555-0000";
-    
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            // Hooray! Let them use the app now.
-            
-//            //Esto siempre es lo mismo
-//            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//            [self setWindow:_window];
+//    //Test user sign in
+//    PFUser *user = [PFUser user];
+//    user.username = @"RandomUser";
+//    user.password = @"blah";
+//    user.email = @"example@gmail.com";
+//    
+//    // other fields can be set if you want to save more information
+//    //    user[@"phone"] = @"650-555-0000";
+//    
+//    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+//        if (!error) {
+//            // Hooray! Let them use the app now.
 //            
 //            
-//            UITabBarController *tb = [[UITabBarController alloc] init];
+//        } else {
+//            NSString *errorString = [error userInfo][@"error"];
 //            
-//            
-//            UITabBarItem *home = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:0];
-//            UITabBarItem *topResearch = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:1];
-//            
-//            //Creates a table for the researches
-//            UIViewController *researchView = [[ResearchViewViewController alloc] init];
-//            UIViewController *topResearchView = [[TopResearch alloc] init];
-//            
-//            
-//            UINavigationController *ncResearchView = [[UINavigationController alloc] initWithRootViewController:researchView];
-//            UINavigationController *ncTopResearchView = [[UINavigationController alloc] initWithRootViewController:topResearchView];
-//            
-//            
-//            researchView.tabBarItem = home;
-//            topResearchView.tabBarItem = topResearch;
-//            
-//            //Tab bar
-//            //Array with the views of the tab bar
-//            tb.viewControllers = @[ncResearchView, ncTopResearchView];
-//            //El window va a ser ese que cree
-//            [self.window setRootViewController:tb];
-//            [self.window makeKeyAndVisible];
-
-            
-        } else {
-            NSString *errorString = [error userInfo][@"error"];
-            
-            // Show the errorString somewhere and let the user try again.
-        }
-    }];
+//            // Show the errorString somewhere and let the user try again.
+//        }
+//    }];
 
   
     

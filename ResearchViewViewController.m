@@ -18,11 +18,39 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"I was clicked at %@", indexPath);
+//    NSLog(@"I was clicked at %@", indexPath);
 
     UIViewController *researchDoc = [[UIViewController alloc] init];
     
+//    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
+//    gameScore[@"score"] = @1212;
+//    gameScore[@"playerName"] = @"Daniel";
+//    gameScore[@"cheatMode"] = @YES;
+//    [gameScore saveInBackground];
+    PFObject *investigation = [PFObject objectWithClassName:@"researchProyect"];
+    investigation[@"poster"] =@"";
     
+//    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
+//    [query getObjectInBackgroundWithId:@"oxIwX8ZWsx" block:^(PFObject *gameScore, NSError *error) {
+//        // Do something with the returned PFObject in the gameScore variable.
+//        NSLog(@"%@", gameScore);
+//    }];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
+    [query whereKey:@"playerName" equalTo:@"Sean Plott"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            // Do something with the found objects
+            for (PFObject *object in objects) {
+                NSLog(@"%@", object.objectId);
+            }
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
     //Sends the view to the researchDoc
     [self.navigationController pushViewController:researchDoc animated:YES];
     
@@ -47,22 +75,24 @@
     [super viewDidLoad];
     
     
-    
 //    //Data test
 //    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
 //    testObject[@"foo"] = @"bar";
 //    [testObject saveInBackground];
+//    
+//  
+//    NSDictionary *dimensions = @{
+//                                 // What type of news is this?
+//                                 @"category": @"politics",
+//                                 // Is it a weekday or the weekend?
+//                                 @"dayType": @"weekday",
+//                                 };
+//    
+//    // Send the dimensions to Parse along with the 'read' event
+//    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
     
-
-    NSDictionary *dimensions = @{
-                                 // What type of news is this?
-                                 @"category": @"politics",
-                                 // Is it a weekday or the weekend?
-                                 @"dayType": @"weekday",
-                                 };
-    // Send the dimensions to Parse along with the 'read' event
     
-    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
+    
     // Do any additional setup after loading the view.
     self.title = @"Researches";
     
