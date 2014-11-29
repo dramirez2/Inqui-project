@@ -27,8 +27,9 @@
 //    gameScore[@"playerName"] = @"Daniel";
 //    gameScore[@"cheatMode"] = @YES;
 //    [gameScore saveInBackground];
-    PFObject *investigation = [PFObject objectWithClassName:@"researchProyect"];
-    investigation[@"poster"] =@"";
+    
+//    PFObject *researches = [PFObject objectWithClassName:@"researchProyect"];
+//    researches[@"poster"] =@"";
     
 //    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
 //    [query getObjectInBackgroundWithId:@"oxIwX8ZWsx" block:^(PFObject *gameScore, NSError *error) {
@@ -41,7 +42,8 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
-            NSLog(@"Successfully retrieved %d scores.", objects.count);
+            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+            
             // Do something with the found objects
             for (PFObject *object in objects) {
                 NSLog(@"%@", object.objectId);
@@ -58,15 +60,34 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    PFQuery *researchesQ = [PFQuery queryWithClassName:@"TestObject"];
+    
+    [researchesQ countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
+        if (!error) {
+            NSLog(@"There are %d many queries",number);
+        } else {
+            NSLog(@"Something went bad");
+        }
+    }];
+//    researchesQ.countObjects;
+    
+//    NSLog(@"%ld",(long) researchesQ.countObjects);
+        return 10;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
-//    indexPath.length;
-    //Me quede tratando de unir un int al string
     
-    cell.detailTextLabel.text = @"Research title";
+//  For test purposes, here is the title with its index
+    NSString *myIndex = [NSString stringWithFormat:@"%d", indexPath.row];
+    NSString *myTitle = @"Research title ";
+    NSString *myResearch = [NSString stringWithFormat:@"%@%@",myTitle,myIndex];
+
+    
+    cell.detailTextLabel.text = myResearch;
+//    cell.detailTextLabel.text = @"Research title #%", myIndex;
+//    NSLog(@"%ld",(long) indexPath.row);
+    
     
     return cell;
 }

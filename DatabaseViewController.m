@@ -1,24 +1,23 @@
 //
-//  researchDoc.m
+//  DatabaseViewController.m
 //  Inqui
 //
-//  Created by Daniel Ramirez Calderon on 11/24/14.
+//  Created by Daniel Ramirez Calderon on 11/27/14.
 //  Copyright (c) 2014 Inqui Project. All rights reserved.
 //
 
-#import "researchDoc.h"
-
-
-@interface researchDoc ()
+#import "DatabaseViewController.h"
+#import "AppDelegate.h"
+#import <Parse/Parse.h>
+@interface DatabaseViewController ()
 
 @end
 
-@implementation researchDoc
+@implementation DatabaseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Something";
-       
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

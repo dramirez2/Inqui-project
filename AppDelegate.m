@@ -11,6 +11,8 @@
 #import "ResearchViewViewController.h"
 #import "TopResearch.h"
 #import "researchDoc.h"
+#import "ProfileViewController.h"
+#import "SettingsViewController.h"
 #import <Parse/Parse.h>
 
 @interface AppDelegate ()
@@ -63,28 +65,36 @@
                                               
     UITabBarItem *home = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:0];
     UITabBarItem *topResearch = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:1];
+    UITabBarItem *profile = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:2];
+    UITabBarItem *settings = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemRecents tag:3];
     
     //Creates a table for the researches
     UIViewController *researchView = [[ResearchViewViewController alloc] init];
     UIViewController *topResearchView = [[TopResearch alloc] init];
+    UIViewController *profileView = [[ProfileViewController alloc] init];
+    UIViewController *settingsView = [[SettingsViewController alloc] init];
     
     
     UINavigationController *ncResearchView = [[UINavigationController alloc] initWithRootViewController:researchView];
     UINavigationController *ncTopResearchView = [[UINavigationController alloc] initWithRootViewController:topResearchView];
-    
+    UINavigationController *ncProfileView = [[UINavigationController alloc] initWithRootViewController:profileView];
+    UINavigationController *ncSettings = [[UINavigationController alloc] initWithRootViewController:settingsView];
     
     researchView.tabBarItem = home;
     topResearchView.tabBarItem = topResearch;
+    profileView.tabBarItem = profile;
+    settingsView.tabBarItem = settings;
     
     //Tab bar
     //Array with the views of the tab bar
-    tb.viewControllers = @[ncResearchView, ncTopResearchView];
+    tb.viewControllers = @[ncResearchView, ncTopResearchView, ncProfileView, ncSettings];
     //El window va a ser ese que cree
     [self.window setRootViewController:tb];
     [self.window makeKeyAndVisible];
     
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

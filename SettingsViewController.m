@@ -1,24 +1,23 @@
 //
-//  researchDoc.m
+//  SettingsViewController.m
 //  Inqui
 //
-//  Created by Daniel Ramirez Calderon on 11/24/14.
+//  Created by Daniel Ramirez Calderon on 11/27/14.
 //  Copyright (c) 2014 Inqui Project. All rights reserved.
 //
 
-#import "researchDoc.h"
+#import "SettingsViewController.h"
 
-
-@interface researchDoc ()
+@interface SettingsViewController ()
 
 @end
 
-@implementation researchDoc
+@implementation SettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"Something";
-       
+    // Do any additional setup after loading the view.
+    self.title = @"Settings";
 }
 
 - (void)didReceiveMemoryWarning {
