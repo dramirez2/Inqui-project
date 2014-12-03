@@ -14,6 +14,7 @@
 #import "ProfileViewController.h"
 #import "SettingsViewController.h"
 #import "LoginUserViewController.h"
+#import "StartViewController.h"
 #import <Parse/Parse.h>
 
 @interface AppDelegate ()
@@ -59,12 +60,15 @@
     //Esto siempre es lo mismo
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setWindow:_window];
+
+    UIViewController *start = [[StartViewController alloc] init];
+
+
+//    UIViewController *login = [[LoginUserViewController alloc] init];
+    [self.window setRootViewController:start];
     
-
-    UIViewController *login = [[LoginUserViewController alloc] init];
-
     //    [self.window setRootViewController:tb];
-    [self.window setRootViewController:login];
+//    [self.window setRootViewController:login];
     [self.window makeKeyAndVisible];
     
     return YES;

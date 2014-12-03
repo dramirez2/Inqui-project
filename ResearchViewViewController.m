@@ -96,23 +96,6 @@
     [super viewDidLoad];
     
     
-//    //Data test
-//    PFObject *testObject = [PFObject objectWithClassName:@"TestObject"];
-//    testObject[@"foo"] = @"bar";
-//    [testObject saveInBackground];
-//    
-//  
-//    NSDictionary *dimensions = @{
-//                                 // What type of news is this?
-//                                 @"category": @"politics",
-//                                 // Is it a weekday or the weekend?
-//                                 @"dayType": @"weekday",
-//                                 };
-//    
-//    // Send the dimensions to Parse along with the 'read' event
-//    [PFAnalytics trackEvent:@"read" dimensions:dimensions];
-    
-    
     
     // Do any additional setup after loading the view.
     self.title = @"Researches";
