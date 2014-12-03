@@ -13,6 +13,7 @@
 #import "researchDoc.h"
 #import "ProfileViewController.h"
 #import "SettingsViewController.h"
+#import "LoginUserViewController.h"
 #import <Parse/Parse.h>
 
 @interface AppDelegate ()
@@ -59,37 +60,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setWindow:_window];
     
-    
-    UITabBarController *tb = [[UITabBarController alloc] init];
-   
-                                              
-    UITabBarItem *home = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:0];
-    UITabBarItem *topResearch = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:1];
-    UITabBarItem *profile = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:2];
-    UITabBarItem *settings = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemRecents tag:3];
-    
-    //Creates a table for the researches
-    UIViewController *researchView = [[ResearchViewViewController alloc] init];
-    UIViewController *topResearchView = [[TopResearch alloc] init];
-    UIViewController *profileView = [[ProfileViewController alloc] init];
-    UIViewController *settingsView = [[SettingsViewController alloc] init];
-    
-    
-    UINavigationController *ncResearchView = [[UINavigationController alloc] initWithRootViewController:researchView];
-    UINavigationController *ncTopResearchView = [[UINavigationController alloc] initWithRootViewController:topResearchView];
-    UINavigationController *ncProfileView = [[UINavigationController alloc] initWithRootViewController:profileView];
-    UINavigationController *ncSettings = [[UINavigationController alloc] initWithRootViewController:settingsView];
-    
-    researchView.tabBarItem = home;
-    topResearchView.tabBarItem = topResearch;
-    profileView.tabBarItem = profile;
-    settingsView.tabBarItem = settings;
-    
-    //Tab bar
-    //Array with the views of the tab bar
-    tb.viewControllers = @[ncResearchView, ncTopResearchView, ncProfileView, ncSettings];
-    //El window va a ser ese que cree
-    [self.window setRootViewController:tb];
+
+    UIViewController *login = [[LoginUserViewController alloc] init];
+
+    //    [self.window setRootViewController:tb];
+    [self.window setRootViewController:login];
     [self.window makeKeyAndVisible];
     
     return YES;

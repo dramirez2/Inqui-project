@@ -1,33 +1,24 @@
 //
-//  LogInViewController.m
+//  LoginUserViewController.m
 //  Inqui
 //
-//  Created by Daniel Ramirez Calderon on 11/25/14.
+//  Created by Daniel Ramirez Calderon on 12/2/14.
 //  Copyright (c) 2014 Inqui Project. All rights reserved.
 //
 
-#import "LogInViewController.h"
-#import "AppDelegate.h"
-#import "ResearchViewViewController.h"
-#import "TopResearch.h"
-#import "ProfileViewController.h"
-#import "SettingsViewController.h"
-#import <Parse/Parse.h>
-@interface LogInViewController ()
+#import "LoginUserViewController.h"
+
+@interface LoginUserViewController ()
 
 @end
 
-@implementation LogInViewController
-
+@implementation LoginUserViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-
-    //Create an app delegate instance
-//    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    self.view.backgroundColor = [UIColor whiteColor];
+    // Do any additional setup after loading the view.
     
-//    creates the button
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     
     [button setTitle:@"Press Me" forState:UIControlStateNormal];
@@ -38,38 +29,17 @@
     // Add an action in current code file (i.e. target)
     [button addTarget:self action:@selector(buttonPressed:)
      
-    forControlEvents:UIControlEventTouchUpInside];
+     forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
 
     
     
-        //Test user sign in
-        PFUser *user = [PFUser user];
-        user.username = @"RandomUser";
-        user.password = @"blah";
-        user.email = @"example@gmail.com";
-    
-        // other fields can be set if you want to save more information
-        //    user[@"phone"] = @"650-555-0000";
-    
-//        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//            if (!error) {
-//                // Hooray! Let them use the app now.
-//    
-//    
-//            } else {
-//                NSString *errorString = [error userInfo][@"error"];
-//    
-//                // Show the errorString somewhere and let the user try again.
-//            }
-//        }];
-
-
-    
 }
+
 - (void)buttonPressed:(UIButton *)button {
-//    NSLog(@"Button Pressed");
-//  Creates an instance to the appDelegate
+    //    NSLog(@"Button Pressed");
+    
+    //  Creates an instance to the appDelegate
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
     //Tab bar controller
@@ -102,17 +72,12 @@
     //Array with the views of the tab bar
     tb.viewControllers = @[ncResearchView, ncTopResearchView, ncProfileView, ncSettings];
     
-//    UIViewController *login = [[LogInViewController alloc] init];
-
-
+    //    UIViewController *login = [[LogInViewController alloc] init];
     
-//    [appDelegate.window setRootViewController:tb];
+
+    [appDelegate.window setRootViewController:tb];
     
 }
-
-//- (IBAction)usernameText:(UITextField *)sender {
-//    NSLog(@"It worked, the name thing");
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

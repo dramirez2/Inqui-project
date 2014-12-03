@@ -21,16 +21,16 @@
 //    NSLog(@"I was clicked at %@", indexPath);
 
     UIViewController *researchDoc = [[UIViewController alloc] init];
-    
+//    
 //    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
-//    gameScore[@"score"] = @1212;
+//    gameScore[@"score"] = @20112;
 //    gameScore[@"playerName"] = @"Daniel";
-//    gameScore[@"cheatMode"] = @YES;
+//    gameScore[@"cheatMode"] = @NO;
 //    [gameScore saveInBackground];
-    
+//    
 //    PFObject *researches = [PFObject objectWithClassName:@"researchProyect"];
 //    researches[@"poster"] =@"";
-    
+//    
 //    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
 //    [query getObjectInBackgroundWithId:@"oxIwX8ZWsx" block:^(PFObject *gameScore, NSError *error) {
 //        // Do something with the returned PFObject in the gameScore variable.
@@ -38,7 +38,7 @@
 //    }];
     
     PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
-    [query whereKey:@"playerName" equalTo:@"Sean Plott"];
+    [query whereKey:@"playerName" equalTo:@"Daniel"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
