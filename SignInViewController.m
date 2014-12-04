@@ -110,20 +110,37 @@
 
 - (void)buttonPressed:(UIButton *)button {
     
-    if (self.passwordS != nil && self.usernameS != nil && self.emailS != nil ){
-        AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-        
-        //Creates the
-        LoginUserViewController *login = [[LoginUserViewController alloc] init];
+    PFUser *user = [PFUser user];
+    user.username = self.usernameS.text;
+    user.password = self.passwordS.text;
+    user.email = self.emailS.text;
     
-        login._username = self.usernameS;
-        login._email = self.emailS;
-        login._password = self.passwordS;
-        
-        [appDelegate.window setRootViewController:login];
-        
-    }
-    //    NSLog(@"Button Pressed");
+    
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            // Hooray! Let them use the app now.
+            if (self.passwordS != nil && self.usernameS != nil && self.emailS != nil ){
+                AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+                
+                //Creates the
+                LoginUserViewController *login = [[LoginUserViewController alloc] init];
+                
+                login._username = self.usernameS;
+                login._email = self.emailS;
+                login._password = self.passwordS;
+                
+                [appDelegate.window setRootViewController:login];
+                
+            }
+
+        } else {
+            NSString *errorString = [error userInfo][@"error"];
+            NSLog(@"There was an error %@",errorString);
+            // Show the errorString somewhere and let the user try again.
+        }
+    }];
+
+        //    NSLog(@"Button Pressed");
     
     //  Creates an instance to the appDelegate
    }

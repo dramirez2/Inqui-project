@@ -54,7 +54,7 @@
     [username setText:self._username.text];
     username.layer.borderWidth = 0.5;
     username.layer.borderColor = [[UIColor grayColor] CGColor];
-    
+    username.tag = 0;
     
     [password setReturnKeyType:UIReturnKeyDone];
     //Hide the characters
@@ -63,6 +63,7 @@
     [password setText:self._password.text];
     password.layer.borderColor = [[UIColor grayColor] CGColor];
     password.layer.borderWidth = 0.5;
+    password.tag = 1;
     
 //    [email setReturnKeyType:UIReturnKeyDone];
 //    //Change the keyboard style
@@ -112,12 +113,25 @@
 -(void)setPassword:(UITextField *)password{
     __password = password;
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    //This function is needed to change the values as they are being placed
+    
+    if (textField.tag == 0) {
+        self._username = textField;
+        
+    } else if (textField.tag == 1){
+        self._password = textField;
+        
+    } else if(textField.tag == 2){
+        self._email = textField;
+    }
+    
+}
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     NSLog(@"Text from username %@",self._username.text);
 //    self._username.text = textField.text;
-    
     [self setUsername:textField];
     //You can do something with the string content, maybe set a property that holds the credentials
     NSLog(@"The key was returned %@",textField.text);
@@ -135,7 +149,7 @@
 
 - (void)buttonPressed:(UIButton *)button {
     //    NSLog(@"Button Pressed");
-    
+
     //  Creates an instance to the appDelegate
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
     
@@ -168,9 +182,23 @@
     
     //Array with the views of the tab bar
     tb.viewControllers = @[ncResearchView, ncTopResearchView, ncProfileView, ncSettings];
+    if (self._username != nil) {
+        [PFUser logInWithUsernameInBackground:self._username.text password:self._password.text
+                                        block:^(PFUser *user, NSError *error) {
+                                            if (user) {
+                                                // Do stuff after successful login.
+                                                [appDelegate.window setRootViewController:tb];
+                                            } else {
+                                                // The login failed. Check error to see why.
+                                                NSString *errorString = [error userInfo][@"error"];
+                                                
+                                                NSLog(@"There was an error %@ %@",errorString,self._username.text);
+                                            }
+                                        }];
+    }
     
-
-    [appDelegate.window setRootViewController:tb];
+    
+//    [appDelegate.window setRootViewController:tb];
     
 }
 
