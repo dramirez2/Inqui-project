@@ -7,7 +7,13 @@
 //
 
 #import "ViewController.h"
+#import "StartViewController.h"
+#import "LoginUserViewController.h"
+#import <Parse/Parse.h>
+@interface SignInViewController : ViewController <UITextFieldDelegate>
 
-@interface SignInViewController : ViewController
+@property UITextField *usernameS;
+@property UITextField *passwordS;
+@property UITextField *emailS;
 
 @end

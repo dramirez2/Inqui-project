@@ -10,6 +10,9 @@
 #import <UIKit/UIKit.h>
 //son para añadir cosas <>
 
-@interface ResearchViewViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ResearchViewViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+
+@property (nonatomic, strong) NSString *objectIds;
 
 @end
+

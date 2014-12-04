@@ -13,6 +13,12 @@
 #import "ProfileViewController.h"
 #import "SettingsViewController.h"
 #import <Parse/Parse.h>
-@interface LoginUserViewController : ViewController
+
+@interface LoginUserViewController : ViewController <UITextFieldDelegate>
+
+@property UITextField *_username;
+@property UITextField *_password;
+@property UITextField *_email;
+
 
 @end

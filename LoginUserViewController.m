@@ -26,11 +26,11 @@
     [button setTitle:@"Press Me" forState:UIControlStateNormal];
     [button sizeToFit];
     // Set a new (x,y) point for the button's center
-    button.center = CGPointMake(360/2, 70);
+    button.center = CGPointMake(150, 300);
     
     [press setTitle:@"Send info" forState:UIControlStateNormal];
     [press sizeToFit];
-    press.center = CGPointMake(400/2, 90);
+    press.center = CGPointMake(150, 350);
     
     // Add an action in current code file (i.e. target)
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -47,36 +47,40 @@
 //    The parameters are X,Y,Width,Height
     UITextField *username = [[UITextField alloc] initWithFrame:CGRectMake(10, 150, self.view.bounds.size.width - 20, 25)];
     UITextField *password = [[UITextField alloc] initWithFrame:CGRectMake(10, 200, self.view.bounds.size.width - 20, 25)];
-    UITextField *email = [[UITextField alloc] initWithFrame:CGRectMake(10, 250, self.view.bounds.size.width - 20, 25)];
+//    UITextField *email = [[UITextField alloc] initWithFrame:CGRectMake(10, 250, self.view.bounds.size.width - 20, 25)];
     
     [username setReturnKeyType:UIReturnKeyDone];
     [username setPlaceholder:@"Username"];
+    [username setText:self._username.text];
     username.layer.borderWidth = 0.5;
     username.layer.borderColor = [[UIColor grayColor] CGColor];
+    
     
     [password setReturnKeyType:UIReturnKeyDone];
     //Hide the characters
     password.secureTextEntry = YES;
     [password setPlaceholder:@"Password"];
+    [password setText:self._password.text];
     password.layer.borderColor = [[UIColor grayColor] CGColor];
     password.layer.borderWidth = 0.5;
     
-    [email setReturnKeyType:UIReturnKeyDone];
-    //Change the keyboard style
-    [email setKeyboardType:UIKeyboardTypeEmailAddress];
-    [email setPlaceholder:@"Email"];
-    email.layer.borderColor = [[UIColor grayColor] CGColor];
-    email.layer.borderWidth = 0.5;
+//    [email setReturnKeyType:UIReturnKeyDone];
+//    //Change the keyboard style
+//    [email setKeyboardType:UIKeyboardTypeEmailAddress];
+//    [email setPlaceholder:@"Email"];
+//    email.layer.borderColor = [[UIColor grayColor] CGColor];
+//    email.layer.borderWidth = 0.5;
     
 //    Makes them refer to themselves
     username.delegate = self;
     password.delegate = self;
-    email.delegate = self;
+//    email.delegate = self;
 
 //    UIScrollView *windows = [[UIScrollView alloc] init];
     [self.view addSubview:username];
     [self.view addSubview:password];
-    [self.view addSubview:email];
+//    [self.view addSubview:email];
+    
     
     
 }

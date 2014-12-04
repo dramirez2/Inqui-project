@@ -9,6 +9,7 @@
 //self es ResearchVIewController
 #import "ResearchViewViewController.h"
 #import "AppDelegate.h"
+#import "researchDocViewController.h"
 #import <Parse/Parse.h>
 @interface ResearchViewViewController ()
 
@@ -20,7 +21,27 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    NSLog(@"I was clicked at %@", indexPath);
 
-    UIViewController *researchDoc = [[UIViewController alloc] init];
+//    UIViewController *researchDoc = [[researchDoc alloc] initWithNibName:@"researchDoc" bundle:nil];
+//    UIViewController *researchView = [[ResearchViewViewController alloc] init];
+
+    researchDocViewController *researchDoc = [[researchDocViewController alloc] init];
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Research"];
+    NSArray *objects = [query findObjects];
+
+    if (objects.count > 0) {
+        PFObject *researches = objects[indexPath.row];
+        
+        //      Takes the title of the investigation
+        NSLog(@"The object id %@", researches.objectId);
+        researchDoc.objectId = researches.objectId;
+    }
+
+    [self.navigationController pushViewController:researchDoc animated:YES];
+
+    
+    //    [researchDoc ]
+    
 //    
 //    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
 //    gameScore[@"score"] = @20112;
@@ -37,69 +58,68 @@
 //        NSLog(@"%@", gameScore);
 //    }];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
-    [query whereKey:@"playerName" equalTo:@"Daniel"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            // The find succeeded.
-            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-            
-            // Do something with the found objects
-            for (PFObject *object in objects) {
-                NSLog(@"%@", object.objectId);
-            }
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
+//    PFQuery *query = [PFQuery queryWithClassName:@"Research"];
+    
+//    [query whereKey:@"Title" equalTo:@"Daniel"];
+//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//        if (!error) {
+//            // The find succeeded.
+//            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
+//            NSLog(@"The object in row %d is %@",indexPath.row, objects[indexPath.row]);
+//            // Do something with the found objects
+//            for (PFObject *object in objects) {
+//                NSLog(@"%@", object.objectId);
+//            }
+//        } else {
+//            // Log details of the failure
+//            NSLog(@"Error: %@ %@", error, [error userInfo]);
+//        }
+//    }];
+    
     //Sends the view to the researchDoc
-    [self.navigationController pushViewController:researchDoc animated:YES];
+//    [self.navigationController pushViewController:researchDoc animated:YES];
     
     
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    PFQuery *researchesQ = [PFQuery queryWithClassName:@"TestObject"];
+    PFQuery *researchesQ = [PFQuery queryWithClassName:@"Research"];
+
+    int amount = researchesQ.countObjects;
     
-    [researchesQ countObjectsInBackgroundWithBlock:^(int number, NSError *error) {
-        if (!error) {
-            NSLog(@"There are %d many queries",number);
-        } else {
-            NSLog(@"Something went bad");
-        }
-    }];
-//    researchesQ.countObjects;
-    
-//    NSLog(@"%ld",(long) researchesQ.countObjects);
-        return 10;
+    if (amount > 0) {
+        return amount;
+    } else {
+        return 0;
+    }
 }
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
-    
-//  For test purposes, here is the title with its index
-    NSString *myIndex = [NSString stringWithFormat:@"%d", indexPath.row];
-    NSString *myTitle = @"Research title ";
-    NSString *myResearch = [NSString stringWithFormat:@"%@%@",myTitle,myIndex];
+//    NSLog(@"Entered the row %d",indexPath.row);
+    PFQuery *query = [PFQuery queryWithClassName:@"Research"];
+    NSArray *objects = [query findObjects];
+   
+    if (objects.count > 0) {
+        PFObject *researches = objects[indexPath.row];
+//      Takes the title of the investigation 
+        cell.detailTextLabel.text = researches[@"Title"];
+    }
+//            cell.detailTextLabel.text =@"Research Title";
 
-    
-    cell.detailTextLabel.text = myResearch;
-//    cell.detailTextLabel.text = @"Research title #%", myIndex;
-//    NSLog(@"%ld",(long) indexPath.row);
-    
-    
     return cell;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+
+//    UISearchBar  *sBar = [[UISearchBar alloc]initWithFrame:CGRectMake(300,10,self.navigationController.navigationBar.bounds.size.width/3,self.navigationController.navigationBar.bounds.size.height/2)];
+//    sBar.delegate = self;
+//    [self.navigationController.navigationBar addSubview:sBar];
     
     // Do any additional setup after loading the view.
     self.title = @"Researches";
-    
     //En los ultimos dos son width y height, primeros x, y
     UITableView *tbresearches = [[UITableView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width , self.view.bounds.size.height)];
     tbresearches.delegate = self;

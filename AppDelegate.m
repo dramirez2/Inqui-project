@@ -10,7 +10,7 @@
 #import "ViewController.h"
 #import "ResearchViewViewController.h"
 #import "TopResearch.h"
-#import "researchDoc.h"
+#import "researchDocViewController.h"
 #import "ProfileViewController.h"
 #import "SettingsViewController.h"
 #import "LoginUserViewController.h"
@@ -29,7 +29,6 @@
     //Connecting with Parse
     [Parse setApplicationId:@"divSVWHMZYoUGRBLFpOIUGpUCYeJYPoZUQuWdphT"
                   clientKey:@"I5h2WqlXZJgCJCL10EauF3plUANhSPdQrtkY4NTN"];
-    
     //To track statistics
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
@@ -60,10 +59,10 @@
     //Esto siempre es lo mismo
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setWindow:_window];
-
+    
     UIViewController *start = [[StartViewController alloc] init];
-
-
+    UIViewController *ivan = [[UIViewController alloc] init];
+    
 //    UIViewController *login = [[LoginUserViewController alloc] init];
     [self.window setRootViewController:start];
     

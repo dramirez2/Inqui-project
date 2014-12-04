@@ -7,7 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
+#import "LoginUserViewController.h"
+#import "SignInViewController.h"
+#import <Parse/Parse.h>
 
 @interface StartViewController : ViewController
+
 
 @end

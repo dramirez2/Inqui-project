@@ -1,13 +1,20 @@
 //
-//  SignOrLogViewController.h
-//  Inqui
+//  DefaultSettingsViewController.h
+//  LogInAndSignUpDemo
 //
-//  Created by Daniel Ramirez Calderon on 12/3/14.
-//  Copyright (c) 2014 Inqui Project. All rights reserved.
+//  Created by Mattieu Gamache-Asselin on 6/14/12.
+//  Copyright (c) 2013 Parse. All rights reserved.
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
+#import <Parse/Parse.h>
 
-@interface SignOrLogViewController : ViewController
+
+@interface DefaultSettingsViewController : UIViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
+
+@property (nonatomic, strong) IBOutlet UILabel *welcomeLabel;
+
+- (IBAction)logOutButtonTapAction:(id)sender;
 
 @end
