@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TopResearch : UIViewController
+@interface TopResearch : UIViewController <UIScrollViewDelegate>
 
 @end

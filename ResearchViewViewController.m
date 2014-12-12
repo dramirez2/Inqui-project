@@ -36,48 +36,9 @@
         NSLog(@"The object id %@", researches.objectId);
         researchDoc.objectId = researches.objectId;
     }
-
+ //Sends the view to the researchDoc
     [self.navigationController pushViewController:researchDoc animated:YES];
 
-    
-    //    [researchDoc ]
-    
-//    
-//    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
-//    gameScore[@"score"] = @20112;
-//    gameScore[@"playerName"] = @"Daniel";
-//    gameScore[@"cheatMode"] = @NO;
-//    [gameScore saveInBackground];
-//    
-//    PFObject *researches = [PFObject objectWithClassName:@"researchProyect"];
-//    researches[@"poster"] =@"";
-//    
-//    PFQuery *query = [PFQuery queryWithClassName:@"GameScore"];
-//    [query getObjectInBackgroundWithId:@"oxIwX8ZWsx" block:^(PFObject *gameScore, NSError *error) {
-//        // Do something with the returned PFObject in the gameScore variable.
-//        NSLog(@"%@", gameScore);
-//    }];
-    
-//    PFQuery *query = [PFQuery queryWithClassName:@"Research"];
-    
-//    [query whereKey:@"Title" equalTo:@"Daniel"];
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//        if (!error) {
-//            // The find succeeded.
-//            NSLog(@"Successfully retrieved %lu scores.", (unsigned long)objects.count);
-//            NSLog(@"The object in row %d is %@",indexPath.row, objects[indexPath.row]);
-//            // Do something with the found objects
-//            for (PFObject *object in objects) {
-//                NSLog(@"%@", object.objectId);
-//            }
-//        } else {
-//            // Log details of the failure
-//            NSLog(@"Error: %@ %@", error, [error userInfo]);
-//        }
-//    }];
-    
-    //Sends the view to the researchDoc
-//    [self.navigationController pushViewController:researchDoc animated:YES];
     
     
 }
@@ -85,7 +46,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     PFQuery *researchesQ = [PFQuery queryWithClassName:@"Research"];
 
-    int amount = researchesQ.countObjects;
+    NSInteger amount = researchesQ.countObjects;
     
     if (amount > 0) {
         return amount;
@@ -97,6 +58,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+   
 //    NSLog(@"Entered the row %d",indexPath.row);
     PFQuery *query = [PFQuery queryWithClassName:@"Research"];
     NSArray *objects = [query findObjects];
@@ -104,12 +66,15 @@
     if (objects.count > 0) {
         PFObject *researches = objects[indexPath.row];
 //      Takes the title of the investigation 
-        cell.detailTextLabel.text = researches[@"Title"];
+        cell.textLabel.text = researches[@"Title"];
+        
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Likes",researches[@"Likes"]];
     }
 //            cell.detailTextLabel.text =@"Research Title";
 
     return cell;
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

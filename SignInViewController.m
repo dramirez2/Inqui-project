@@ -115,7 +115,7 @@
     user.password = self.passwordS.text;
     user.email = self.emailS.text;
     
-    
+    if (user.username != nil && user.password != nil && user.email != nil){
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             // Hooray! Let them use the app now.
@@ -137,8 +137,16 @@
             NSString *errorString = [error userInfo][@"error"];
             NSLog(@"There was an error %@",errorString);
             // Show the errorString somewhere and let the user try again.
-        }
+            [[[UIAlertView alloc]
+              initWithTitle:NSLocalizedString(@"Invalid Sign Up", @"")
+              message:NSLocalizedString(@"The credentials submitted were not valid, please try again.", @"")
+              delegate:nil
+              cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+              otherButtonTitles: nil] show];
+            
+                    }
     }];
+    }
 
         //    NSLog(@"Button Pressed");
     

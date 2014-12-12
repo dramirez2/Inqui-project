@@ -16,9 +16,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    UIImageView *images = [[UIImageView alloc] initWithFrame:CGRectMake(0, 65, self.view.bounds.size.width, self.view.bounds.size.height/2)];    // Do any additional setup after loading the view.
+//    images.self.backgroundColor = [UIColor redColor];
+    [self.view addSubview:images];
+    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0,self.view.bounds.size.height/2, self.view.bounds.size.width, self.view.bounds.size.height/4)];
+//    scroll.backgroundColor = [UIColor blueColor];
+    scroll.delegate = self;
+    
     self.title = @"Top research";
     self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor blueColor];           
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -20,25 +20,21 @@
     // Do any additional setup after loading the view.
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIButton *press = [UIButton buttonWithType:UIButtonTypeSystem];
     
     
-    [button setTitle:@"Press Me" forState:UIControlStateNormal];
+    [button setTitle:@"Log In" forState:UIControlStateNormal];
     [button sizeToFit];
     // Set a new (x,y) point for the button's center
     button.center = CGPointMake(150, 300);
     
-    [press setTitle:@"Send info" forState:UIControlStateNormal];
-    [press sizeToFit];
-    press.center = CGPointMake(150, 350);
+    
     
     // Add an action in current code file (i.e. target)
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [press addTarget:self action:@selector(anotherButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    ;
     
     
     [self.view addSubview:button];
-    [self.view addSubview:press];
     
     //Creating the tap gesture recognizer
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -132,19 +128,23 @@
     [textField resignFirstResponder];
     NSLog(@"Text from username %@",self._username.text);
 //    self._username.text = textField.text;
-    [self setUsername:textField];
     //You can do something with the string content, maybe set a property that holds the credentials
     NSLog(@"The key was returned %@",textField.text);
+    
+    if (textField.tag == 0) {
+        self._username = textField;
+        
+    } else if (textField.tag == 1){
+        self._password = textField;
+        
+    } else if(textField.tag == 2){
+        self._email = textField;
+    }
+
     return YES;
 }
 
 
--(void)anotherButtonPressed:(UIButton *)press{
-//    AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-
-    UIViewController *dude = [[ResearchViewViewController alloc] init];
-    [self.navigationController pushViewController:dude animated:YES];
-}
 
 
 - (void)buttonPressed:(UIButton *)button {
@@ -182,10 +182,11 @@
     
     //Array with the views of the tab bar
     tb.viewControllers = @[ncResearchView, ncTopResearchView, ncProfileView, ncSettings];
-    if (self._username != nil) {
+    NSLog(@"This is the username %@ and thsis the password %@",self._username.text,self._password.text);
+    if (self._username != nil && self._password != nil) {
         [PFUser logInWithUsernameInBackground:self._username.text password:self._password.text
                                         block:^(PFUser *user, NSError *error) {
-                                            if (user) {
+                                        if (user) {
                                                 // Do stuff after successful login.
                                                 [appDelegate.window setRootViewController:tb];
                                             } else {
@@ -193,7 +194,13 @@
                                                 NSString *errorString = [error userInfo][@"error"];
                                                 
                                                 NSLog(@"There was an error %@ %@",errorString,self._username.text);
-                                            }
+
+                                                [[[UIAlertView alloc]
+                                                  initWithTitle:NSLocalizedString(@"Invalid Login", @"")
+                                                  message:NSLocalizedString(@"The username or password is not correct.", @"")
+                                                  delegate:nil
+                                                  cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+                                                  otherButtonTitles: nil] show];}
                                         }];
     }
     
@@ -201,7 +208,6 @@
 //    [appDelegate.window setRootViewController:tb];
     
 }
-
 //- (IBAction)TestFile:(UITextField *)sender {
 //    
 //}
