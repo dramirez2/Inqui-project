@@ -26,12 +26,17 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Research"];
     
     [query getObjectInBackgroundWithId:_objectId block:^(PFObject *object, NSError *error) {
-        self.title = [NSString stringWithFormat:@"%@",object[@"Title"]];
-
-        NSLog(@"%@",object[@"Title"]);
+//        self.title = [NSString stringWithFormat:@"%@",object[@"Title"]];
+        self.title = @"Details";
+        NSLog(@"The likes of this thing is %@",object[@"Likes"]);
     }];
     [self.view addSubview:alabel];
     
+    
+    UIScrollView *scrolling = [[UIScrollView alloc] initWithFrame:(CGRectMake(0, 300, self.view.bounds.size.width, self.view.bounds.size.height))];
+    scrolling.backgroundColor = [UIColor redColor];
+    
+    [self.view addSubview:scrolling];
 //_objectId
     
 }
