@@ -17,24 +17,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"Entered here");
+    self.title = @"Details";
     self.view.backgroundColor = [UIColor whiteColor ];
-    UILabel *alabel = [[UILabel alloc] init];
     
-    alabel.center = CGPointMake(10, 300);
+    UILabel *alabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 0, self.view.bounds.size.width, 100))];
+    
     alabel.textColor = [UIColor blackColor];
-    alabel.text = [NSString stringWithFormat:@"Dude"];
+    alabel.text = @"Testing man this shit is bananas \r b-a-n-a-n-a-s uhu this my shit! \r a new \r another";
+    alabel.numberOfLines = self.view.bounds.size.height;
+    
     PFQuery *query = [PFQuery queryWithClassName:@"Research"];
     
     [query getObjectInBackgroundWithId:_objectId block:^(PFObject *object, NSError *error) {
 //        self.title = [NSString stringWithFormat:@"%@",object[@"Title"]];
-        self.title = @"Details";
         NSLog(@"The likes of this thing is %@",object[@"Likes"]);
     }];
-    [self.view addSubview:alabel];
     
+    UIView *testing = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))];
+    [testing addSubview:alabel];
+    testing.backgroundColor = [UIColor whiteColor];
     
-    UIScrollView *scrolling = [[UIScrollView alloc] initWithFrame:(CGRectMake(0, 300, self.view.bounds.size.width, self.view.bounds.size.height))];
-    scrolling.backgroundColor = [UIColor redColor];
+    UIScrollView *scrolling = [[UIScrollView alloc] initWithFrame:(CGRectMake(0, 100, self.view.bounds.size.width, self.view.bounds.size.height))];
+    scrolling.scrollEnabled = YES;
+    scrolling.showsVerticalScrollIndicator = YES;
+    
+//    scrolling.backgroundColor = [UIColor redColor];
+    
+    [scrolling addSubview:testing];
+    scrolling.contentSize = testing.frame.size;
     
     [self.view addSubview:scrolling];
 //_objectId

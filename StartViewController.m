@@ -49,15 +49,41 @@
 
 - (void)buttonPressedLogin:(UIButton *)button{
     NSLog(@"I have been pressed");
-//    UIViewController *nclogin = [[UIViewController alloc]init];
-//    UINavigationController *ncStart = [[UINavigationController alloc] initWithRootViewController:nclogin];
-//    
-//    [ncStart.navigationController pushViewController:nclogin animated:YES];
-//    [self.navigationController pushViewController:login animated:YES];
-    
-    UIViewController *login = [[LoginUserViewController alloc] init];
     AppDelegate *appDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    [appDelegate.window setRootViewController:login];
+
+//    UIViewController *login = [[LoginUserViewController alloc] init];
+//    [appDelegate.window setRootViewController:login];
+    
+    //Tab bar controller
+    UITabBarController *tb = [[UITabBarController alloc] init];
+    
+    //Tab bar item declarations
+    UITabBarItem *home = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemContacts tag:0];
+    UITabBarItem *topResearch = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemTopRated tag:1];
+    UITabBarItem *profile = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFeatured tag:2];
+    UITabBarItem *settings = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemRecents tag:3];
+    
+    //Creates a table for the researches
+    UIViewController *researchView = [[ResearchViewViewController alloc] init];
+    UIViewController *topResearchView = [[TopResearch alloc] init];
+    UIViewController *profileView = [[ProfileViewController alloc] init];
+    UIViewController *settingsView = [[SettingsViewController alloc] init];
+    
+    //Navigation items
+    UINavigationController *ncResearchView = [[UINavigationController alloc] initWithRootViewController:researchView];
+    UINavigationController *ncTopResearchView = [[UINavigationController alloc] initWithRootViewController:topResearchView];
+    UINavigationController *ncProfileView = [[UINavigationController alloc] initWithRootViewController:profileView];
+    UINavigationController *ncSettings = [[UINavigationController alloc] initWithRootViewController:settingsView];
+    
+    //Sets the tab bar items to their view controllers
+    researchView.tabBarItem = home;
+    topResearchView.tabBarItem = topResearch;
+    profileView.tabBarItem = profile;
+    settingsView.tabBarItem = settings;
+    
+    //Array with the views of the tab bar
+    tb.viewControllers = @[ncResearchView, ncTopResearchView, ncProfileView, ncSettings];
+    [appDelegate.window setRootViewController:tb];
 
 }
 
