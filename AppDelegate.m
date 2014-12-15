@@ -61,7 +61,7 @@
     [self setWindow:_window];
     
     UIViewController *start = [[StartViewController alloc] init];
-    UIViewController *ivan = [[UIViewController alloc] init];
+   // UIViewController *ivan = [[UIViewController alloc] init];
     
 //    UIViewController *login = [[LoginUserViewController alloc] init];
     [self.window setRootViewController:start];

@@ -22,17 +22,23 @@
     //IVAN, ESTE LABEL ES LO QUE APARECE EN EL SCROLL VIEW, SE PONE EN EL VIEW
     UILabel *alabel = [[UILabel alloc] initWithFrame:(CGRectMake(0, 0, self.view.bounds.size.width, 100))];
     
-    alabel.textColor = [UIColor blackColor];
-    alabel.text = @"Testing man this shit is bananas \r b-a-n-a-n-a-s uhu this my shit! \r a new \r another";
-    alabel.numberOfLines = self.view.bounds.size.height;
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Research"];
     
-    [query getObjectInBackgroundWithId:_objectId block:^(PFObject *object, NSError *error) {
-//        self.title = [NSString stringWithFormat:@"%@",object[@"Title"]];
-        NSLog(@"The likes of this thing is %@",object[@"Likes"]);
+    [query getObjectInBackgroundWithId:_objectId block:^(PFObject *Abst, NSError *error) {
+        NSString *abstract = Abst[@"Abstracts"];
+        alabel.text = abstract;
+        //        self.title = [NSString stringWithFormat:@"%@",object[@"Title"]];
+        NSLog(@"Retrieved the abstract... I think...");
     }];
-    //IVAN, AQUI ESTA EL VIEW DONDE LE A~ADES EL LABEL, Y ESTE VIEW LO A~ADES AL SCROLLVIEW
+
+    
+    
+    
+    alabel.textColor = [UIColor blackColor];
+    //alabel.text = @"Whaat \r b-a-n-a-n-a-s uhu this my shit! \r a new \r another";
+    alabel.numberOfLines = self.view.bounds.size.height;
+    
+        //IVAN, AQUI ESTA EL VIEW DONDE LE A~ADES EL LABEL, Y ESTE VIEW LO A~ADES AL SCROLLVIEW
     UIView *testing = [[UIView alloc] initWithFrame:(CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))];
     //EL ACTO DE PONER EL LABEL EN EL VIEW
     [testing addSubview:alabel];
